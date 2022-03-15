@@ -146,6 +146,28 @@ class RebelServiceTest {
                         this.rebelService.negotiateResources(rebelOne.getId(),rebelTwo.getId(),negotiationDto));
     }
 
+    @Test
+    @DisplayName("Resource trading when the resources points are no equals --> get a error DivergentNegotiationValueException")
+    void resourcesNegotiationWhenResourcesPointsAreNoEquals(){
+        Rebel rebelOne = createRebel();
+        Rebel rebelTwo = createRebel();
+        NegotiationItemDto send = new NegotiationItemDto(ResourcesEnum.WATER,2);
+        NegotiationItemDto receive = new NegotiationItemDto(ResourcesEnum.WATER,1);
+        NegotiationDto negotiationDto = new NegotiationDto(List.of(send), List.of(receive));
+        rebelOne.getResources().get(0).setQuantity(2);
+        rebelTwo.setId(2);
+        rebelTwo.setName("Outro rebel");
+
+        Mockito.when(rebelRepository.save(rebelOne)).thenReturn(rebelOne);
+        Mockito.when(rebelRepository.save(rebelTwo)).thenReturn(rebelTwo);
+        Mockito.when(rebelRepository.findById(rebelOne.getId())).thenReturn(Optional.of(rebelOne));
+        Mockito.when(rebelRepository.findById(rebelTwo.getId())).thenReturn(Optional.of(rebelTwo));
+
+        Assertions.assertThatExceptionOfType(NegotiationResourcesPointsIsNotEqualsException.class)
+                .isThrownBy(() ->
+                        this.rebelService.negotiateResources(rebelOne.getId(),rebelTwo.getId(),negotiationDto));
+    }
+
 
     public Rebel createRebel(){
         Rebel rebel = Rebel.builder()

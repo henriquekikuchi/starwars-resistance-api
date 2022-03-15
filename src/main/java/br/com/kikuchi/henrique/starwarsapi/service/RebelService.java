@@ -62,7 +62,7 @@ public class RebelService {
 
         if (!isEnough) throw new RebelResourcesIsNotEnoughException();
 
-        if (!(meItensTotalPoints.compareTo(otherItensTotalPoints) == 0)) throw new DivergentNegotiationValueException();
+        if (!(meItensTotalPoints.compareTo(otherItensTotalPoints) == 0)) throw new NegotiationResourcesPointsIsNotEqualsException();
 
         List<RebelResource> newMeResources = getResourceListNegotiated(me, receiveItens, meResources);
         List<RebelResource> newOtherResources = getResourceListNegotiated(other, sendItens, otherResources);
