@@ -63,7 +63,7 @@ class RebelServiceTest {
     }
 
     @Test
-    @DisplayName("Resources negotiation with successfull")
+    @DisplayName("Resources trading with successful")
     void resourcesNegotiationWithSuccessful(){
         Rebel rebelOne = createRebel();
         Rebel rebelTwo = createRebel();
