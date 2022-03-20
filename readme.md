@@ -37,12 +37,12 @@ Realizei os testes unitários nas classes **Report e Rebel**.
 ### Orientação:
 Coloquei na pasta raiz do projeto, um arquivo do postman contendo todos os testes necessários para testar as rotas do projeto.
 ### Requisitos do projeto:
-[x] - Rota para cadastro de novos rebeldes
-[x] - Rota para atualizar a localização do rebelde
-[x] - Rota para realizar troca de itens entre os rebeldes
-[x] - Rota para denunciar rebeldes como traidores
-[x] - Realizado os testes unitários na camada de services
-[x] - Boas práticas do SOLID (talvez)
+- [x] Rota para cadastro de novos rebeldes
+- [x] Rota para atualizar a localização do rebelde
+- [x] Rota para realizar troca de itens entre os rebeldes
+- [x] Rota para denunciar rebeldes como traidores
+- [x] Realizado os testes unitários na camada de services
+- [x] Boas práticas do SOLID (talvez)
 
 ## Projeto
 - - -
