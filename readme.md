@@ -31,7 +31,7 @@ Realizei os testes unitários nas classes **Report e Rebel**.
 
 ## Ao avaliador
 ### Orientação:
-Coloquei na pasta resources, um arquivo do postman contendo todos os testes necessários para testar as rotas do projeto.
+Coloquei na pasta resources um arquivo do postman contendo todos os testes necessários para testar as rotas do projeto.
 ### Requisitos do projeto:
 - [x] Rota para cadastro de novos rebeldes
 - [x] Rota para atualizar a localização do rebelde
