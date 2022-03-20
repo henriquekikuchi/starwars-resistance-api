@@ -22,15 +22,12 @@ public class ReportService {
         Integer accuserId = report.getAccuser().getId();
         Integer accusedId = report.getAccused().getId();
 
-        if (reportRepository.existsByAccuserIdAndAccusedId(accuserId, accusedId)){
+        if (reportRepository.existsByAccuserIdAndAccusedId(accuserId, accusedId))
             throw new ReportAlreadyExistsException();
-        }
+
         Report reportSaved = reportRepository.save(report);
         Rebel rebelReported = rebelService.getById(report.getAccused().getId());
-        //Inventory rebelReportedInventory = rebelReported.getInventory();
         if (rebelReported.getReportedList().size() >= 3) {
-            //rebelReportedInventory.setBlocked(true);
-            //rebelReported.setInventory(rebelReportedInventory);
             rebelReported.setBetrayer(true);
             rebelService.save(rebelReported);
         }

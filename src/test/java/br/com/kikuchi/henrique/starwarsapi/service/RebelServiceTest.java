@@ -55,7 +55,7 @@ class RebelServiceTest {
     }
 
     @Test
-    @DisplayName("Find rebel when not exists")
+    @DisplayName("Find rebel when not exists --> get a error RebelNotFoundException")
     void findByIdRebelWithUnsuccessful(){
         Mockito.when(rebelRepository.findById(anyInt())).thenThrow(new RebelNotFoundException());
         Assertions.assertThatExceptionOfType(RebelNotFoundException.class)
@@ -147,7 +147,7 @@ class RebelServiceTest {
     }
 
     @Test
-    @DisplayName("Resource trading when the resources points are no equals --> get a error DivergentNegotiationValueException")
+    @DisplayName("Resource trading when the resources points are no equals --> get a error NegotiationResourcesPointsIsNotEqualsException")
     void resourcesNegotiationWhenResourcesPointsAreNoEquals(){
         Rebel rebelOne = createRebel();
         Rebel rebelTwo = createRebel();
