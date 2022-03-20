@@ -1,8 +1,42 @@
-# Starwars Resistance API
+# Starwars Resistance Social Network API
 Projeto desenvolvido para auxiliar os rebeldes envolvidos na luta contra o império.
+## Descrição do problema
+O império continua na luta incessante de dominar a galáxia, tentando com todas suas forças acabar com os rebeldes.
+E você, soldado da resistência foi convocado para desenvolver um sistema para compartilha recursos entre os rebeldes.
+## Requisitos funcionais
+### Adicionar rebeldes
+O rebelde deve ter nome, idade, genero, localização (latitude, longitude, nome) e também um inventário contendo os recursos em sua posse.
+### Atualizar localização do rebelde
+Um rebelde deve ter a capacidade de reportar sua última localização, armazenando latitude/longitude/nome (não é necessário rastrear as localizações, apenas sobrescrever a última é suficiente)
+### Reportar o rebelde como um traidor
+Eventualmente algum rebelde irá trair a resistência e se aliar ao império. Quando isso acontecer, nós precisamos informar que o rebelde é um traidor.
+Um traidor não pode negociar os recursos com os demais rebeldes, não pode manipular seu inventário, nem exibido em relatórios.
+Um rebelde é marcado como traidor quando, ao menos, três outros rebeldes reportarem a traição.
+Uma vez marcado como traidor, os itens do inventário se tornam inacessíveis (eles não podem ser negociados com os demais).
+### Rebeldes não podem Adicionar/Remover itens do seu invetário
+Seus pertences devem ser declarados quando eles são registrados no sistema. Após isso eles só poderão mudar seu inventário através de negociação com outros rebeldes.
+### Negociar itens
+Os rebeldes poderão negociar itens entre eles.
+Para isso, eles devem respeitar a tabela de preços abaixo, onde o valor do item é descrito em termos de pontos;
+Ambos os lados deverão oferecer a mesma quantidade de pontos. Por exemplo, 1 arma e 1 água (1 x 4 + 1 x 2) valem 6 comidas (6 x 1) ou 2 munições (2 x 3).
+A negociação em si não será armazenada, mas os itens deverão ser transferidos de um rebelde a outro.
 
-# Disclaimer
-Haha na verdade é um projeto para conclusão do modulo de desenvolvimento web do curso de _Desenvolvimento full stack_ da _lets code_ em parceria com o _Santander_. O intuito do projeto é avaliar o aprendizado durante o módulo.
+|    ITEM    |  PONTOS   |
+|:----------:|:---------:|
+|   1 Arma   |     4     |
+| 1 Munição  |     3     |
+|   1 Água   |     2     |
+|  1 Comida  |     1     |
+### Relatórios
+  1. Porcentagem de traidores
+  2. Porcentagem de rebeldes
+  3. Quantidade média de cada tipo de recurso por rebelde (Ex: 2 armas por rebelde)
+  4. Pontos perdidos devido a traidores
+## Requisitos não funcionais
+1. Utilizar Java, Spring boot, Spring Data, Hibernate (pode usar H2) e gradle ou maven
+2. Não será necessário autenticação
+3. Código limpo demonstrará que você é um soldado digno da resistencia atraves de suas habilidades
+4. Sua API deve estar minimamente coberta por testes (Unitários e/ou integração).
 
 ## Estrutura do projeto
 ### Camadas
@@ -48,8 +82,111 @@ Coloquei na pasta resources um arquivo do postman contendo todos os testes neces
 
 ### Instalação
 Clone o repositório e entrando dentro da pasta raiz utilize o próprio maven wrapper para conseguir roda-lo.
->./mvnw exec:java -Dexec.mainClass="br.com.kikuchi.henrique.StarwarsApiApplication"
+>./mvnw spring-boot:run
 
 ### Como utilizar
 Após inicia-lo por meio do comando citado acima na parte de *Instalação* será necessário que acesse a documentação das rotas para entender como fazer requisições aos **End Points**. Caso precise alterar a porta que o projeto está usando altere no arquivo **resources/application.yml**. Para isso acesse o seguinte endereço:
 > http://localhost:8080/api/starwars/swagger-ui.html
+
+## End points
+### /rebels
+> GET http://localhost:8080/api/starwars/rebels para listar todos rebeldes
+
+> POST http://localhost:8080/api/starwars/rebels para salvar novo rebelde
+
+Request body:
+```
+{
+    "name": "DWIGHT SCHURUTE",
+    "age": 41,
+    "gender": "MALE",
+    "location": {
+        "latitude": 1.555,
+        "longitude": 56.655,
+        "name": "Netuno"
+    },
+    "resources": [
+        {
+            "resource": "BULLET",
+            "quantity": 2
+        }, {
+            "resource": "WEAPON",
+            "quantity": 4
+        }, {
+            "resource": "FOOD",
+            "quantity": 7
+        }, {
+            "resource": "WATER",
+            "quantity": 9
+        }
+    ]
+}
+```
+> GET http://localhost:8080/api/starwars/rebels/{id} para retornar o rebelde pelo id
+
+> PATCH http://localhost:8080/api/starwars/rebels/{id}/location para atualizar a localização do rebelde
+
+Request body:
+```
+{
+    "latitude": 1.555,
+    "longitude": 5.555,
+    "name": "Lets code"
+}
+```
+
+> POST http://localhost:8080/api/starwars/rebels/{id}/negotiate/{idOtherRebel} negociar itens entre rebeldes
+
+Request body:
+```
+{
+    "send": [
+        {
+            "resource": "WATER",
+            "quantity": 2
+        }
+    ]
+    ,
+    "receive": [
+        {
+            "resource": "WEAPON",
+            "quantity": 1
+        }
+    ]
+}
+```
+
+### /report
+> POST http://localhost:8080/api/starwars/reports para denunciar rebelde
+
+Request body:
+```
+{
+  "idAccused": 1,
+  "idAccuser": 2
+}
+```
+
+### /dashboard
+> GET http://localhost:8080/api/starwars/dashboard
+
+Response body:
+```
+{
+    "dashboardMap": {
+        "Percentage Of Rebels And Betrayers": {
+            "Rebel": 0.8333333333333334,
+            "Betrayer": 0.16666666666666666
+        },
+        "Lost Points": {
+            "Because Of Betrayers": 31.0
+        },
+        "Mean Resources Per Rebel": {
+            "weapon": 5.2,
+            "bullet": 4.0,
+            "water": 5.4,
+            "food": 6.2
+        }
+    }
+}
+```
