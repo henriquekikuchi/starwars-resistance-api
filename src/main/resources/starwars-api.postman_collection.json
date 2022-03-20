@@ -1,0 +1,530 @@
+{
+	"info": {
+		"_postman_id": "a0a224c5-8fd7-4fd4-a5dd-fc768f3cc3ca",
+		"name": "starwars-api",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Add rebel 01",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"name\": \"PAM BEESLY\",\n    \"age\": 37,\n    \"gender\": \"FEMALE\",\n    \"location\": {\n        \"latitude\": 3.555,\n        \"longitude\": 4.655,\n        \"name\": \"Dunder Mifflin\"\n    },\n    \"resources\": [\n        {\n            \"resource\": \"BULLET\",\n            \"quantity\": 2\n        }, {\n            \"resource\": \"WEAPON\",\n            \"quantity\": 2\n        }, {\n            \"resource\": \"FOOD\",\n            \"quantity\": 3\n        }, {\n            \"resource\": \"WATER\",\n            \"quantity\": 7\n        }\n    ]\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/starwars/rebels",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"starwars",
+						"rebels"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Add rebel 02",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"name\": \"DWIGHT SCHURUTE\",\n    \"age\": 41,\n    \"gender\": \"MALE\",\n    \"location\": {\n        \"latitude\": 1.555,\n        \"longitude\": 56.655,\n        \"name\": \"Netuno\"\n    },\n    \"resources\": [\n        {\n            \"resource\": \"BULLET\",\n            \"quantity\": 2\n        }, {\n            \"resource\": \"WEAPON\",\n            \"quantity\": 4\n        }, {\n            \"resource\": \"FOOD\",\n            \"quantity\": 7\n        }, {\n            \"resource\": \"WATER\",\n            \"quantity\": 9\n        }\n    ]\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/starwars/rebels",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"starwars",
+						"rebels"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Add rebel 03",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"name\": \"JIM HALPERT\",\n    \"age\": 38,\n    \"gender\": \"MALE\",\n    \"location\": {\n        \"latitude\": 50.555,\n        \"longitude\": 35.655,\n        \"name\": \"Andromeda\"\n    },\n    \"resources\": [\n        {\n            \"resource\": \"BULLET\",\n            \"quantity\": 4\n        }, {\n            \"resource\": \"WEAPON\",\n            \"quantity\": 10\n        }, {\n            \"resource\": \"FOOD\",\n            \"quantity\": 9\n        }, {\n            \"resource\": \"WATER\",\n            \"quantity\": 6\n        }\n    ]\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/starwars/rebels",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"starwars",
+						"rebels"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Add rebel 04",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"name\": \"ANGELA NOELLE\",\n    \"age\": 43,\n    \"gender\": \"FEMALE\",\n    \"location\": {\n        \"latitude\": 50.555,\n        \"longitude\": 35.655,\n        \"name\": \"Andromeda\"\n    },\n    \"resources\": [\n        {\n            \"resource\": \"BULLET\",\n            \"quantity\": 3\n        }, {\n            \"resource\": \"WEAPON\",\n            \"quantity\": 2\n        }, {\n            \"resource\": \"FOOD\",\n            \"quantity\": 7\n        }, {\n            \"resource\": \"WATER\",\n            \"quantity\": 4\n        }\n    ]\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/starwars/rebels",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"starwars",
+						"rebels"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Add rebel 05",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"name\": \"PHYLLIS VANCE\",\n    \"age\": 56,\n    \"gender\": \"FEMALE\",\n    \"location\": {\n        \"latitude\": 35.555,\n        \"longitude\": 33.655,\n        \"name\": \"Antennae Galaxies\"\n    },\n    \"resources\": [\n        {\n            \"resource\": \"BULLET\",\n            \"quantity\": 5\n        }, {\n            \"resource\": \"WEAPON\",\n            \"quantity\": 7\n        }, {\n            \"resource\": \"FOOD\",\n            \"quantity\": 2\n        }, {\n            \"resource\": \"WATER\",\n            \"quantity\": 3\n        }\n    ]\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/starwars/rebels",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"starwars",
+						"rebels"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Add rebel 06",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"name\": \"KEVIN MALONE\",\n    \"age\": 54,\n    \"gender\": \"MALE\",\n    \"location\": {\n        \"latitude\": 35.555,\n        \"longitude\": 33.655,\n        \"name\": \"Butterfly Galaxies\"\n    },\n    \"resources\": [\n        {\n            \"resource\": \"BULLET\",\n            \"quantity\": 6\n        }, {\n            \"resource\": \"WEAPON\",\n            \"quantity\": 3\n        }, {\n            \"resource\": \"FOOD\",\n            \"quantity\": 6\n        }, {\n            \"resource\": \"WATER\",\n            \"quantity\": 5\n        }\n    ]\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/starwars/rebels",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"starwars",
+						"rebels"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "rebel 01 denuncia rebel 02",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"idAccuser\": 1,\n    \"idAccused\": 2\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/starwars/reports",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"starwars",
+						"reports"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "rebel 03 denuncia rebel 02",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"idAccuser\": 3,\n    \"idAccused\": 2\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/starwars/reports",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"starwars",
+						"reports"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "rebel 04 denuncia rebel 02",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"idAccuser\": 3,\n    \"idAccused\": 2\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/starwars/reports",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"starwars",
+						"reports"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "rebel 02 marcado como traidor -> Usando GetById",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/starwars/rebels/2",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"starwars",
+						"rebels",
+						"2"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "rebel 01 tenta trocar com rebelde 02 (traidor)",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"send\": [\n        {\n            \"resource\": \"WATER\",\n            \"quantity\": 2\n        }\n    ]\n    ,\n    \"receive\": [\n        {\n            \"resource\": \"WEAPON\",\n            \"quantity\": 1\n        }\n    ]\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/starwars/rebels/1/negotiate/2",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"starwars",
+						"rebels",
+						"1",
+						"negotiate",
+						"2"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "rebel 01 tenta trocar com rebelde 03 com recursos insuficientes",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"send\": [\n        {\n            \"resource\": \"WATER\",\n            \"quantity\": 8\n        }\n    ]\n    ,\n    \"receive\": [\n        {\n            \"resource\": \"WEAPON\",\n            \"quantity\": 1\n        }\n    ]\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/starwars/rebels/1/negotiate/3",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"starwars",
+						"rebels",
+						"1",
+						"negotiate",
+						"3"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "rebel 01 tenta trocar com rebelde 03 com recursos suficientes porém com pontos diferentes",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"send\": [\n        {\n            \"resource\": \"WATER\",\n            \"quantity\": 1\n        }\n    ]\n    ,\n    \"receive\": [\n        {\n            \"resource\": \"WEAPON\",\n            \"quantity\": 1\n        }\n    ]\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/starwars/rebels/1/negotiate/3",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"starwars",
+						"rebels",
+						"1",
+						"negotiate",
+						"3"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "rebel 01 tenta trocar com rebelde 03 troca bem succedida",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"send\": [\n        {\n            \"resource\": \"WATER\",\n            \"quantity\": 2\n        }\n    ]\n    ,\n    \"receive\": [\n        {\n            \"resource\": \"WEAPON\",\n            \"quantity\": 1\n        }\n    ]\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/starwars/rebels/1/negotiate/3",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"starwars",
+						"rebels",
+						"1",
+						"negotiate",
+						"3"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "mudar a localização do rebel 01",
+			"request": {
+				"method": "PATCH",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"latitude\": 1.555,\n    \"longitude\": 5.555,\n    \"name\": \"Lets code\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/starwars/rebels/1/location",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"starwars",
+						"rebels",
+						"1",
+						"location"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "dashboard",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/starwars/dashboard",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"starwars",
+						"dashboard"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
