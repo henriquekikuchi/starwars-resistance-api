@@ -81,6 +81,7 @@ class RebelServiceTest {
         ResponseEntity<String> resp = rebelService.negotiateResources(rebelOne.getId(),rebelTwo.getId(),negotiationDto);
 
         Assertions.assertThat(resp.getBody()).isEqualTo("The negotiation was successfully!");
+
     }
 
     @Test
@@ -130,8 +131,8 @@ class RebelServiceTest {
     void resourcesNegotiationWhenResourcesIsNotEnough(){
         Rebel rebelOne = createRebel();
         Rebel rebelTwo = createRebel();
-        NegotiationItemDto send = new NegotiationItemDto(ResourcesEnum.WATER,1);
-        NegotiationItemDto receive = new NegotiationItemDto(ResourcesEnum.WATER,9999);
+        NegotiationItemDto send = new NegotiationItemDto(ResourcesEnum.WATER,4);
+        NegotiationItemDto receive = new NegotiationItemDto(ResourcesEnum.WATER,4);
         NegotiationDto negotiationDto = new NegotiationDto(List.of(send), List.of(receive));
         rebelTwo.setId(2);
         rebelTwo.setName("Outro rebel");

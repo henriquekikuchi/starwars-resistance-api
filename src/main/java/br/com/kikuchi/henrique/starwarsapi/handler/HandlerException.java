@@ -24,15 +24,15 @@ public class HandlerException {
     @ExceptionHandler({RebelNotFoundException.class})
     public ResponseEntity<Error> handlerRebelNotFound(){
         return ResponseEntity.status(HttpStatus.NOT_FOUND)
-                .body(new Error("Rebel not found",
-                        "Rebel not found"));
+                .body(new Error("Rebel not found!",
+                        "Rebel not found!"));
     }
 
     @ExceptionHandler({BetrayerDetectedException.class})
     public ResponseEntity<Error> handlerBetrayerException(){
         return ResponseEntity.status(HttpStatus.FORBIDDEN)
-                .body(new Error("You are a betrayer",
-                        "Betrayers are not allowed to do this"));
+                .body(new Error("Betrayer detected!",
+                        "Betrayers are not allowed to do this!"));
     }
 
     @ExceptionHandler({RebelResourcesIsNotEnoughException.class})
@@ -40,6 +40,14 @@ public class HandlerException {
         return ResponseEntity.status(HttpStatus.FORBIDDEN)
                 .body(new Error("insufficient resources",
                         "You or the other rebel don't have enough resources to carry out this operation."));
+    }
+
+    @ExceptionHandler({NegotiationResourcesPointsIsNotEqualsException.class})
+    public ResponseEntity<Error> handlerNegotiationResourcesPointsIsNotEqualsException(){
+        return ResponseEntity.status(HttpStatus.FORBIDDEN)
+                .body(new Error("insufficient points",
+                        "For this operation it is necessary that both rebels send the same amount of points," +
+                                " see the points per item in the instructions."));
     }
 
     @ExceptionHandler({ReportAlreadyExistsException.class})

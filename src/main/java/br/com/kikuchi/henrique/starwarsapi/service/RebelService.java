@@ -41,125 +41,64 @@ public class RebelService {
         return new ResponseEntity<String>("Location updated with successfully", HttpStatus.NO_CONTENT);
     }
 
-    public ResponseEntity<String> negotiateResources(Integer id, Integer idOtherRebel, NegotiationDto negotiationDto) {
+    public ResponseEntity<String> negotiateResources(Integer meId, Integer otherId, NegotiationDto negotiationDto) {
+        if (meId.equals(otherId)) throw new SelfNegotiationException();
 
-        if (id == idOtherRebel) throw new SelfNegotiationException();
+        Rebel me = getById(meId);
+        Rebel other = getById(otherId);
 
-        Rebel me = getById(id);
-        Rebel other = getById(idOtherRebel);
+        if(me.isBetrayer() || other.isBetrayer()) throw new BetrayerDetectedException();
 
-        if (me.isBetrayer() || other.isBetrayer()) throw new BetrayerDetectedException();
+        if (!isBothNegotiationPointsEquals(negotiationDto)) throw new NegotiationResourcesPointsIsNotEqualsException();
 
-        List<NegotiationItemDto> sendItens = negotiationDto.send();
-        List<NegotiationItemDto> receiveItens = negotiationDto.receive();
-        Integer meItensTotalPoints = getTotalPoints(sendItens);
-        Integer otherItensTotalPoints = getTotalPoints(receiveItens);
-        List<RebelResource> meResources = me.getResources();
-        List<RebelResource> otherResources = other.getResources();
+        me = updateResources(me, negotiationDto.send(), negotiationDto.receive());
+        other = updateResources(other, negotiationDto.receive(), negotiationDto.send());
 
-        boolean isEnough = hasEnoughResources(meResources, sendItens)
-                && hasEnoughResources(otherResources, receiveItens);
-
-        if (!isEnough) throw new RebelResourcesIsNotEnoughException();
-
-        if (!(meItensTotalPoints.compareTo(otherItensTotalPoints) == 0)) throw new NegotiationResourcesPointsIsNotEqualsException();
-
-        List<RebelResource> newMeResources = getResourceListNegotiated(me, receiveItens, meResources);
-        List<RebelResource> newOtherResources = getResourceListNegotiated(other, sendItens, otherResources);
-
-        me.setResources(newMeResources);
         rebelRepository.save(me);
-
-        other.setResources(newOtherResources);
         rebelRepository.save(other);
 
         return new ResponseEntity<String>("The negotiation was successfully!", HttpStatus.OK);
     }
 
-    private List<RebelResource> newResourceListWithoutSenders(
-            Rebel rebel,
-            List<NegotiationItemDto> negotiationItemDtoList,
-            List<RebelResource> rebelResourceList) {
-        return rebelResourceList.stream()
-                .map(meResource -> updateResource(rebel, negotiationItemDtoList, meResource))
-                .collect(Collectors.toList());
+    private Rebel updateResources(Rebel rebel, List<NegotiationItemDto> send, List<NegotiationItemDto> receive) {
+        rebel.setResources(deductItensFromResources(send, rebel));
+        rebel.setResources(addReceivedItensToResources(receive, rebel));
+        return rebel;
     }
 
-    private Integer getTotalPoints(List<NegotiationItemDto> negotiationItemDtoList) {
-        Integer totalPoints = negotiationItemDtoList.stream()
-                .map(item -> item.quantity() * item.resource().getPoints())
-                .reduce(0, (acc, act) -> acc += act);
-        return totalPoints;
+    private boolean isBothNegotiationPointsEquals(NegotiationDto negotiationDto) {
+        int a = negotiationDto.send().stream().mapToInt(item -> item.quantity() * item.resource().getPoints()).sum();
+        int b = negotiationDto.receive().stream().mapToInt(item -> item.quantity() * item.resource().getPoints()).sum();
+        return a == b;
     }
 
-    private boolean hasEnoughResources(
-            List<RebelResource> resourceList,
-            List<NegotiationItemDto> negotiationItemDtoList) {
-        return negotiationItemDtoList.stream()
-                .map(negotiationItemDto -> hasEnoughQuantity(negotiationItemDto, resourceList))
-                .map(Boolean::booleanValue)
-                .filter(booleanValue -> !booleanValue)
-                .findFirst()
-                .orElse(true);
+    private List<RebelResource>  addReceivedItensToResources(List<NegotiationItemDto> receiveList, Rebel rebel) {
+        return  rebel.getResources().stream()
+                .map(resource -> {
+                    var itemDto = receiveList.stream()
+                            .filter(it -> it.resource().equals(resource.getResource()))
+                            .findFirst();
+                    if (itemDto.isEmpty()){
+                        return resource;
+                    } else {
+                        NegotiationItemDto negotiationItemDto = itemDto.get();
+                        resource.setQuantity(resource.getQuantity() + negotiationItemDto.quantity());
+                        return resource;
+                    }
+                }).collect(Collectors.toList());
     }
 
-    private boolean hasEnoughQuantity(
-            NegotiationItemDto itemDto,
-            List<RebelResource> resourceList) {
-        int quantity = resourceList.stream()
-                .filter(resource -> resource.getResource().equals(itemDto.resource()))
-                .map(RebelResource::getQuantity)
-                .reduce(0, (acc, act) -> acc += act);
-        return itemDto.quantity() <= quantity;
+    private List<RebelResource> deductItensFromResources(List<NegotiationItemDto> itemList, Rebel rebel) {
+        return rebel.getResources().stream().map(resource -> {
+            var item = itemList.stream()
+                    .filter(it -> resource.getResource().equals(it.resource()))
+                    .findFirst();
+            if (item.isEmpty()) return resource;
+            if (item.get().quantity() > resource.getQuantity()) throw new RebelResourcesIsNotEnoughException();
+            resource.setQuantity(resource.getQuantity() - item.get().quantity());
+            return resource;
+        }).collect(Collectors.toList());
     }
 
-    private RebelResource updateResource(
-            Rebel rebel,
-            List<NegotiationItemDto> negotiationItemDtoList,
-            RebelResource resourceToUpdate) {
-        int newQuantity = negotiationItemDtoList.stream()
-                .filter(negotiationItemDto -> negotiationItemDto.resource().equals(resourceToUpdate.getResource()))
-                .map(NegotiationItemDto::quantity)
-                .reduce(0, (acc, act) -> acc += act);
-        resourceToUpdate.setId(resourceToUpdate.getId());
-        resourceToUpdate.setRebel(rebel);
-        resourceToUpdate.setQuantity(newQuantity);
-        return resourceToUpdate;
-    }
-
-    private RebelResource createResource(
-            Rebel rebel,
-            NegotiationItemDto negotiationItemDto) {
-        return RebelResource.builder()
-                .rebel(rebel)
-                .resource(negotiationItemDto.resource())
-                .quantity(negotiationItemDto.quantity())
-                .build();
-    }
-
-    private boolean verifyIfResourceExists(
-            NegotiationItemDto negotiationItemDto,
-            List<RebelResource> rebelResourceList) {
-        return rebelResourceList.stream()
-                .map(RebelResource::getResource)
-                .filter(rebelResourceItem -> rebelResourceItem.equals(negotiationItemDto.resource()))
-                .findFirst()
-                .isPresent();
-    }
-
-    private List<RebelResource> getResourceListNegotiated(
-            Rebel rebel,
-            List<NegotiationItemDto> negotiationItemDtoList,
-            List<RebelResource> rebelResourceList) {
-        List<RebelResource> newRebelResourceList = newResourceListWithoutSenders(rebel, negotiationItemDtoList, rebelResourceList);
-        for (NegotiationItemDto negotiationItemDto : negotiationItemDtoList) {
-            boolean exists = verifyIfResourceExists(negotiationItemDto, newRebelResourceList);
-            if (!exists) {
-                RebelResource rebelResource = createResource(rebel, negotiationItemDto);
-                newRebelResourceList.add(rebelResource);
-            }
-        }
-        return newRebelResourceList;
-    }
 }
 

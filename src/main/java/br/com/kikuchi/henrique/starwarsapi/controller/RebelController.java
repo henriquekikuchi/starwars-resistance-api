@@ -15,8 +15,10 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.lang.reflect.InvocationTargetException;
+import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
+import java.util.function.Function;
 import java.util.stream.Collectors;
 
 @RestController
@@ -42,13 +44,17 @@ public class RebelController {
     private ResponseEntity<Rebel> save(@RequestBody @Valid RebelCreateDto rebelCreateDto){
         Rebel newRebel = RebelMapper.INSTANCE.rebelCreateDtoToRebel(rebelCreateDto);
         List<RebelResource> resources = newRebel.getResources().stream()
+                .peek(rebelResource -> rebelResource.setRebel(newRebel))
                 .collect(Collectors.groupingBy(RebelResource::getResource, Collectors.reducing((a, b) -> {
                     if (!a.getResource().equals(b.getResource())) return b;
                     a.setQuantity(a.getQuantity() + b.getQuantity());
                     return a;
-                }))).values()
+                })))
+                .values()
                 .stream()
-                .map(Optional::get).toList();
+                .map(opt -> opt.orElse(null))
+                .toList();
+
 
         Location location = LocationMapper.INSTANCE.locationDtoToLocation(rebelCreateDto.location());
         newRebel.setResources(resources);

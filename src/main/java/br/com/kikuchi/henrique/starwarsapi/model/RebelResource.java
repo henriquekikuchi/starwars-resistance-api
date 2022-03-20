@@ -1,6 +1,7 @@
 package br.com.kikuchi.henrique.starwarsapi.model;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 
 import javax.persistence.*;
@@ -19,9 +20,6 @@ public class RebelResource {
 
     @Enumerated(EnumType.STRING)
     private ResourcesEnum resource;
-
-//    @ManyToOne(targetEntity = Inventory.class)
-//    private Inventory inventory;
 
     @ManyToOne(targetEntity = Rebel.class)
     @JsonBackReference

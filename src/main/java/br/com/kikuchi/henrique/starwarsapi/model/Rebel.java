@@ -31,10 +31,6 @@ public class Rebel {
     @JoinColumn(referencedColumnName = "id", name = "location_id")
     private Location location;
 
-//    @OneToOne(cascade = CascadeType.ALL)
-//    @Getter
-//    private Inventory inventory;
-
     @OneToMany(mappedBy="rebel", cascade = CascadeType.ALL)
     @JsonManagedReference
     private List<RebelResource> resources;
@@ -44,13 +40,4 @@ public class Rebel {
     private List<Report> reportedList;
 
     private boolean betrayer;
-
-//    @OneToMany(mappedBy = "accuser", cascade = {CascadeType.ALL})
-//    private List<Report> accusationList;
-
-//    @OneToMany(mappedBy = "from", cascade = {CascadeType.ALL})
-//    private List<Trade> fromMeTradeList;
-//
-//    @OneToMany(mappedBy = "to", cascade = {CascadeType.ALL})
-//    private List<Trade> toMeTradeList;
 }
