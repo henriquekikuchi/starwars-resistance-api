@@ -1,13 +1,10 @@
 # Starwars Resistance API
-* * *
 Projeto desenvolvido para auxiliar os rebeldes envolvidos na luta contra o império.
 
 # Disclaimer
-* * *
 Haha na verdade é um projeto para conclusão do modulo de desenvolvimento web do curso de _Desenvolvimento full stack_ da _lets code_ em parceria com o _Santander_. O intuito do projeto é avaliar o aprendizado durante o módulo.
 
 ## Estrutura do projeto
-* * *
 ### Camadas
 * #### config
 Nessa camada colocamos as configurações que são utilizadas para algumas funcionalidades do projeto, como por exemplo o *Swagger*, transferimos a responsabilidade por gerenciar a instancia dessas classes para o *Spring container*.
@@ -33,7 +30,6 @@ Podemos lembrar desse arquivo como se fosse um .env, nele podemos colocar variav
 Realizei os testes unitários nas classes **Report e Rebel**.
 
 ## Ao avaliador
-* * *
 ### Orientação:
 Coloquei na pasta raiz do projeto, um arquivo do postman contendo todos os testes necessários para testar as rotas do projeto.
 ### Requisitos do projeto:
@@ -45,7 +41,6 @@ Coloquei na pasta raiz do projeto, um arquivo do postman contendo todos os teste
 - [x] Boas práticas do SOLID (talvez)
 
 ## Projeto
-- - -
 ### Pré requisitos
 - Java 17
 - Maven
