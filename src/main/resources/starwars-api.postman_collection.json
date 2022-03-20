@@ -252,7 +252,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n    \"idAccuser\": 3,\n    \"idAccused\": 2\n}",
+					"raw": "{\n    \"idAccuser\": 4,\n    \"idAccused\": 2\n}",
 					"options": {
 						"raw": {
 							"language": "json"
