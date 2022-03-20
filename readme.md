@@ -37,6 +37,7 @@ Coloquei na pasta raiz do projeto, um arquivo do postman contendo todos os teste
 - [x] Rota para atualizar a localização do rebelde
 - [x] Rota para realizar troca de itens entre os rebeldes
 - [x] Rota para denunciar rebeldes como traidores
+- [x] Rota para gerar relatórios
 - [x] Realizado os testes unitários na camada de services
 - [x] Boas práticas do SOLID (talvez)
 
