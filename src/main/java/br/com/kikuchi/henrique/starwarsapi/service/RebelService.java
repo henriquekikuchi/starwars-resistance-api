@@ -8,6 +8,8 @@ import br.com.kikuchi.henrique.starwarsapi.model.Rebel;
 import br.com.kikuchi.henrique.starwarsapi.model.RebelResource;
 import br.com.kikuchi.henrique.starwarsapi.repository.RebelRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -21,8 +23,8 @@ public class RebelService {
 
     private final RebelRepository rebelRepository;
 
-    public List<Rebel> getAll() {
-        return rebelRepository.findAll();
+    public Page<Rebel> getAll(Pageable pageable) {
+        return rebelRepository.findAll(pageable);
     }
 
     public Rebel getById(Integer id) {

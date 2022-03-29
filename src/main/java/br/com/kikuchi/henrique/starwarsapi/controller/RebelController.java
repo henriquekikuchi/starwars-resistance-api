@@ -10,6 +10,8 @@ import br.com.kikuchi.henrique.starwarsapi.model.Rebel;
 import br.com.kikuchi.henrique.starwarsapi.model.RebelResource;
 import br.com.kikuchi.henrique.starwarsapi.service.RebelService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -29,8 +31,8 @@ public class RebelController {
     private final RebelService rebelService;
 
     @GetMapping
-    private ResponseEntity<List<Rebel>> getAll(){
-        List<Rebel> rebelList = rebelService.getAll();
+    private ResponseEntity<Page<Rebel>> getAll(Pageable pageable){
+        Page<Rebel> rebelList = rebelService.getAll(pageable);
         return ResponseEntity.ok(rebelList);
     }
 
