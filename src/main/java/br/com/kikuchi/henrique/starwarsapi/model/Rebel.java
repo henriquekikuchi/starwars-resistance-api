@@ -19,9 +19,6 @@ public class Rebel {
     @GeneratedValue( strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @Column(unique = true)
-    private String name;
-
     private Integer age;
 
     @Enumerated(EnumType.STRING)
